@@ -1481,6 +1481,19 @@ type
   {$EXTERNALSYM CRYPT_RC4_KEY_STATE}
   TCryptRC4KeyState = CRYPT_RC4_KEY_STATE;
   PCryptRC4KeyState = ^PCRYPT_RC4_KEY_STATE;
+
+  PCRYPT_DES_KEY_STATE = ^_CRYPT_DES_KEY_STATE;
+  {$NODEFINE PCRYPT_DES_KEY_STATE}
+  _CRYPT_DES_KEY_STATE = record
+    Key: array [0..7] of Byte;
+    IV: array [0..7] of Byte;
+    Feedback: array [0..7] of Byte;
+  end;
+  {$EXTERNALSYM _CRYPT_DES_KEY_STATE}
+  CRYPT_DES_KEY_STATE = _CRYPT_DES_KEY_STATE;
+  {$EXTERNALSYM CRYPT_DES_KEY_STATE}
+  TCryptDESKeyState = CRYPT_DES_KEY_STATE;
+  PCryptDESKeyState = ^TCryptDESKeyState;
 {$ENDIF}
 
 //+-------------------------------------------------------------------------

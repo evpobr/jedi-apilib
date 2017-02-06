@@ -1170,6 +1170,13 @@ const
   EXPO_OFFLOAD_FUNC_NAME = 'OffloadModExpo';
   {$EXTERNALSYM EXPO_OFFLOAD_FUNC_NAME}
 
+//
+// Registry key in which the following private key-related
+// values are created.
+//
+  szKEY_CRYPTOAPI_PRIVATE_KEY_OPTIONS = 'Software\Policies\Microsoft\Cryptography';
+  {$EXTERNALSYM szKEY_CRYPTOAPI_PRIVATE_KEY_OPTIONS}
+
   CUR_BLOB_VERSION = 2;
   {$EXTERNALSYM CUR_BLOB_VERSION}
 

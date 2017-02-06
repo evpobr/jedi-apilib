@@ -1494,6 +1494,19 @@ type
   {$EXTERNALSYM CRYPT_DES_KEY_STATE}
   TCryptDESKeyState = CRYPT_DES_KEY_STATE;
   PCryptDESKeyState = ^TCryptDESKeyState;
+
+  PCRYPT_3DES_KEY_STATE = ^_CRYPT_3DES_KEY_STATE;
+  {$NODEFINE PCRYPT_3DES_KEY_STATE}
+  _CRYPT_3DES_KEY_STATE = record
+    Key: array [0..23] of Byte;
+    IV: array [0..7] of Byte;
+    Feedback: array [0..7] of Byte;
+  end;
+  {$EXTERNALSYM _CRYPT_3DES_KEY_STATE}
+  CRYPT_3DES_KEY_STATE = _CRYPT_3DES_KEY_STATE;
+  {$EXTERNALSYM CRYPT_3DES_KEY_STATE}
+  TCrypt3DESKeyState = CRYPT_3DES_KEY_STATE;
+  PCrypt3DESKeyState = ^TCrypt3DESKeyState;
 {$ENDIF}
 
 //+-------------------------------------------------------------------------

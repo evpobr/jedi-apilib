@@ -558,6 +558,14 @@ const
   {$EXTERNALSYM CRYPT_IPSEC_HMAC_KEY}
 {$ENDIF}
 
+{$IFDEF WIN2003_UP}
+// dwFlags definitions for CryptDecrypt
+//  See also CRYPT_OAEP, above.
+//  Note, the following flag is not supported for CryptEncrypt
+  CRYPT_DECRYPT_RSA_NO_PADDING_CHECK = $00000020;
+  {$EXTERNALSYM CRYPT_DECRYPT_RSA_NO_PADDING_CHECK}
+{$ENDIF}
+
 // dwFlags definitions for CryptCreateHash
 
   CRYPT_SECRETDIGEST = $00000001;

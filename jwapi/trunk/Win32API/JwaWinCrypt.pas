@@ -1822,6 +1822,18 @@ type
   TGetEncSChannelFunc = function(pData: PPBYTE; var dwDecSize: DWORD): BOOL; cdecl;
 {$ENDIF}
 
+{$IFDEF VISTA_UP}
+// In Vista, the following APIs were updated to support the new
+// CNG (Cryptography Next Generation) BCrypt* and NCrypt* APIs in addition
+// to the above CAPI1 APIs.
+
+// This type is used when the API can take either the CAPI1 HCRYPTPROV or
+// the CNG NCRYPT_KEY_HANDLE. Where appropriate, the HCRYPTPROV will be
+// converted to a NCRYPT_KEY_HANDLE via the CNG NCryptTranslateHandle().
+  HCRYPTPROV_OR_NCRYPT_KEY_HANDLE = ULONG_PTR;
+{$EXTERNALSYM HCRYPTPROV_OR_NCRYPT_KEY_HANDLE}
+{$ENDIF}
+
 //+-------------------------------------------------------------------------
 //  In a CRYPT_BIT_BLOB the last byte may contain 0-7 unused bits. Therefore, the
 //  overall bit length is cbData * 8 - cUnusedBits.

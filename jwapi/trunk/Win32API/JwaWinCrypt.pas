@@ -1472,7 +1472,7 @@ type
   {$NODEFINE PCRYPT_RC4_KEY_STATE}
   _CRYPT_RC4_KEY_STATE = record
     Key: array [0..15] of Byte;
-    SBox: array [0..256] of Byte;
+    SBox: array [0..255] of Byte;
     i: Byte;
     j: Byte;
   end;

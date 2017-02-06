@@ -1467,6 +1467,22 @@ type
   TCertFortezzaDataProp = CERT_FORTEZZA_DATA_PROP;
   PCertFortezzaDataProp = PCERT_FORTEZZA_DATA_PROP;
 
+{$IFDEF WIN2003_UP}
+  PCRYPT_RC4_KEY_STATE = ^_CRYPT_RC4_KEY_STATE;
+  {$NODEFINE PCRYPT_RC4_KEY_STATE}
+  _CRYPT_RC4_KEY_STATE = record
+    Key: array [0..15] of Byte;
+    SBox: array [0..256] of Byte;
+    i: Byte;
+    j: Byte;
+  end;
+  {$EXTERNALSYM _CRYPT_RC4_KEY_STATE}
+  CRYPT_RC4_KEY_STATE = _CRYPT_RC4_KEY_STATE;
+  {$EXTERNALSYM CRYPT_RC4_KEY_STATE}
+  TCryptRC4KeyState = CRYPT_RC4_KEY_STATE;
+  PCryptRC4KeyState = ^PCRYPT_RC4_KEY_STATE;
+{$ENDIF}
+
 //+-------------------------------------------------------------------------
 //  CRYPTOAPI BLOB definitions
 //--------------------------------------------------------------------------

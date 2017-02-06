@@ -1811,6 +1811,17 @@ function CryptDuplicateHash(hHash: HCRYPTHASH; pdwReserved: LPDWORD;
   dwFlags: DWORD; var phHash: HCRYPTHASH): BOOL; stdcall;
 {$EXTERNALSYM CryptDuplicateHash}
 
+{$IFDEF WIN2003_UP}
+//
+// This function is provided in Microsoft Windows 2000 as a means of
+// installing the 128-bit encryption provider. This function is unavailable
+// in Microsoft Windows XP, because Windows XP ships with the 128-bit
+// encryption provider.
+//
+type
+  TGetEncSChannelFunc = function(pData: PPBYTE; var dwDecSize: DWORD): BOOL; cdecl;
+{$ENDIF}
+
 //+-------------------------------------------------------------------------
 //  In a CRYPT_BIT_BLOB the last byte may contain 0-7 unused bits. Therefore, the
 //  overall bit length is cbData * 8 - cUnusedBits.

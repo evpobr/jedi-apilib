@@ -1831,7 +1831,12 @@ type
 // the CNG NCRYPT_KEY_HANDLE. Where appropriate, the HCRYPTPROV will be
 // converted to a NCRYPT_KEY_HANDLE via the CNG NCryptTranslateHandle().
   HCRYPTPROV_OR_NCRYPT_KEY_HANDLE = ULONG_PTR;
-{$EXTERNALSYM HCRYPTPROV_OR_NCRYPT_KEY_HANDLE}
+  {$EXTERNALSYM HCRYPTPROV_OR_NCRYPT_KEY_HANDLE}
+
+// This type is used where the HCRYPTPROV parameter is no longer used.
+// The caller should always pass in NULL.
+  HCRYPTPROV_LEGACY = ULONG_PTR;
+  {$EXTERNALSYM HCRYPTPROV_LEGACY}
 {$ENDIF}
 
 //+-------------------------------------------------------------------------

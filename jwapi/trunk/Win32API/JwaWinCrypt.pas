@@ -571,6 +571,12 @@ const
   CRYPT_SECRETDIGEST = $00000001;
   {$EXTERNALSYM CRYPT_SECRETDIGEST}
 
+{$IFDEF WINXP_UP}
+// dwFlags definitions for CryptHashData
+  CRYPT_OWF_REPL_LM_HASH = $00000001;  // this is only for the OWF replacement CSP
+  {$EXTERNALSYM CRYPT_OWF_REPL_LM_HASH}
+{$ENDIF}
+
 // dwFlags definitions for CryptHashSessionKey
 
   CRYPT_LITTLE_ENDIAN = $00000001;

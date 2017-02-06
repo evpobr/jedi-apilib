@@ -1177,6 +1177,82 @@ const
   szKEY_CRYPTOAPI_PRIVATE_KEY_OPTIONS = 'Software\Policies\Microsoft\Cryptography';
   {$EXTERNALSYM szKEY_CRYPTOAPI_PRIVATE_KEY_OPTIONS}
 
+//
+// Registry values for enabling and controlling the caching (and timeout)
+// of private keys.  This feature is intended for UI-protected private
+// keys.
+//
+// Note that in Windows 2000 and later, private keys, once read from storage,
+// are cached in the associated HCRYPTPROV structure for subsequent use.
+//
+// In Server 2003 and XP SP1, new key caching behavior is available.  Keys
+// that have been read from storage and cached may now be considered "stale"
+// if a period of time has elapsed since the key was last used.  This forces
+// the key to be re-read from storage (which will make the DPAPI UI appear
+// again).
+//
+// Optional Key Timeouts:
+//
+// In Windows Server 2003, XP SP1, and later, new key caching behavior is
+// available.  Keys that have been read from storage and cached per-context
+// may now be considered "stale" if a period of time has elapsed since the
+// key was last used.  This forces the key to be re-read from storage (which
+// will make the Data Protection API dialog appear again if the key is
+// UI-protected).
+//
+// To enable the new behavior, create the registry DWORD value
+// szKEY_CACHE_ENABLED and set it to 1.  The registry DWORD value
+// szKEY_CACHE_SECONDS must also be created and set to the number of seconds
+// that a cached private key may still be considered usable.
+//
+  szKEY_CACHE_ENABLED = 'CachePrivateKeys';
+  szKEY_CACHE_SECONDS = 'PrivateKeyLifetimeSeconds';
+
+{$IFDEF WINXP_UP}
+//
+// In platforms later than (and not including) Windows Server 2003, private
+// keys are always cached for a period of time per-process, even when
+// not being used in any context.
+//
+// The differences between the process-wide caching settings described below
+// and the Optional Key Timeouts described above are subtle.
+//
+//  - The Optional Key Timeout policy is applied only when an attempt is made
+//    to use a specific private key with an open context handle (HCRYPTPROV).
+//    If szKEY_CACHE_SECONDS have elapsed since the key was last used, the
+//    private key will be re-read from storage.
+//
+//  - The Cache Purge Interval policy, below, is applied whenever any
+//    non-ephemeral private key is used or read from storage.  If
+//    szPRIV_KEY_CACHE_PURGE_INTERVAL_SECONDS have elapsed since the last
+//    purge occurred, all cached keys that have not been referenced since the
+//    last purge will be removed from the cache.
+//
+//    If a private key that is purged from the cache is currently
+//    referenced in an open context, then the key will be re-read from storage
+//    the next time an attempt is made to use it (via any context).
+//
+// The following two registry DWORD values control this behavior.
+//
+
+//
+// Registry value for controlling the maximum number of persisted
+// (non-ephemeral) private keys that can be cached per-process.  If the cache
+// fills up, keys will be replaced on a least-recently-used basis.  If the
+// maximum number of cached keys is set to zero, no keys will be globally
+// cached.
+//
+  szPRIV_KEY_CACHE_MAX_ITEMS              = 'PrivKeyCacheMaxItems';
+  cPRIV_KEY_CACHE_MAX_ITEMS_DEFAULT       = 20;
+
+//
+// Registry value for controlling the interval at which the private key
+// cache is proactively purged of outdated keys.
+//
+  szPRIV_KEY_CACHE_PURGE_INTERVAL_SECONDS        = 'PrivKeyCachePurgeIntervalSeconds';
+  cPRIV_KEY_CACHE_PURGE_INTERVAL_SECONDS_DEFAULT = 86400; // 1 day
+{$ENDIF}
+
   CUR_BLOB_VERSION = 2;
   {$EXTERNALSYM CUR_BLOB_VERSION}
 

@@ -1509,6 +1509,23 @@ type
   PCrypt3DESKeyState = ^TCrypt3DESKeyState;
 {$ENDIF}
 
+{$IFDEF WINVISTA_UP}
+  PCRYPT_AES_128_KEY_STATE = ^_CRYPT_AES_128_KEY_STATE;
+  {$NODEFINE PCRYPT_AES_128_KEY_STATE}
+  _CRYPT_AES_128_KEY_STATE = record
+    Key: array [0..15] of Byte;
+    IV: array [0..15] of Byte;
+    EncryptionState: array [0..10, 0..15] of Byte;      // 10 rounds + 1
+    DecryptionState: array [0..10, 0..15] of Byte;
+    Feedback: array [0..15] of Byte;
+  end;
+  {$EXTERNALSYM _CRYPT_AES_128_KEY_STATE}
+  CRYPT_AES_128_KEY_STATE = _CRYPT_AES_128_KEY_STATE;
+  {$EXTERNALSYM CRYPT_AES_128_KEY_STATE}
+  TCryptAES128KeyState = CRYPT_AES_128_KEY_STATE;
+  PCryptAES128KeyState = ^TCryptAES128KeyState;
+{$ENDIF}
+
 //+-------------------------------------------------------------------------
 //  CRYPTOAPI BLOB definitions
 //--------------------------------------------------------------------------

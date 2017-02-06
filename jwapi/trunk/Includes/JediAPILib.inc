@@ -146,7 +146,7 @@ Standalone compiling would be useless!
 {.$DEFINE WIN2008}
 {.$DEFINE WIN2008R2}
 {.$DEFINE WIN7}
-{.$DEFINE WIN8}
+{$DEFINE WIN8}
 
 
 {.DEFINE SERVICEPACK_1}

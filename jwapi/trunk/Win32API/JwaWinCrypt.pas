@@ -719,6 +719,10 @@ const
   KP_GET_USE_COUNT   = 42;      // for use with PP_CRYPT_COUNT_KEY_USE contexts
   {$EXTERNALSYM KP_GET_USE_COUNT}
 {$ENDIF}
+  KP_PIN_ID          = 43;
+  {$EXTERNALSYM KP_PIN_ID}
+  KP_PIN_INFO        = 44;
+  {$EXTERNALSYM KP_PIN_INFO}
 
 // KP_PADDING
 

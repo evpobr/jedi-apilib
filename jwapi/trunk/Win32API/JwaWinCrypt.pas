@@ -764,6 +764,11 @@ const
   {$EXTERNALSYM CRYPT_EXPORT_KEY}
   CRYPT_IMPORT_KEY = $0080; // Allow key to be used for importing keys
   {$EXTERNALSYM CRYPT_IMPORT_KEY}
+{$IFDEF WINXP_UP}
+  CRYPT_ARCHIVE    = $0100; // Allow key to be exported at creation only
+  {$EXTERNALSYM CRYPT_ARCHIVE}
+{$ENDIF}
+
 
   HP_ALGID         = $0001; // Hash algorithm
   {$EXTERNALSYM HP_ALGID}

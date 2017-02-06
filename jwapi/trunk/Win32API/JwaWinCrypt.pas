@@ -553,6 +553,10 @@ const
 
   CRYPT_BLOB_VER3 = $00000080; // export version 3 of a blob type
   {$EXTERNALSYM CRYPT_BLOB_VER3}
+{$IFDEF WINXP_UP}
+  CRYPT_IPSEC_HMAC_KEY = $00000100;  // CryptImportKey only
+  {$EXTERNALSYM CRYPT_IPSEC_HMAC_KEY}
+{$ENDIF}
 
 // dwFlags definitions for CryptCreateHash
 

@@ -9,3 +9,8 @@
 */*/Packages/*/*.res
 *Resource.rc
 bin/
+
+# Delphi history and backups
+__history/
+__recovery/
+*.~*
